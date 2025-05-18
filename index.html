@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="assest/lib/normalize.css">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2&family=Philosopher&family=Raleway&display=swap" rel="stylesheet">
     <style>
+        body{
+            overflow-x: hidden;
+        }
         * {
             font-family: "Palatino Linotype", sans-serif;
             font-optical-sizing: auto;
@@ -22,7 +25,7 @@
             align-items: center;
             height: 60px;
             width: 100%;
-            background-color: burlywood;
+            background-color: ghostwhite;
             position: sticky;
             margin-top: -8px;
         }
@@ -38,7 +41,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            font-size: 25px;
+            font-size: 30px;
         }
 
 
@@ -157,25 +160,34 @@
         }
 
         #login_login{
-            margin-left: 5px;
+            margin-left: 2px;
             color: black;
             font-weight: bold;
+            width: 120px;
         }
         .login-user-name{
             position: relative;
-            left: 22%;
+            left: 21%;
+            width: 520px;
         }
 
+        #login_signup{
+            color: blue;
+        }
+        #signup_login{
+            color:blue ;
+        }
         #loginPage div p{
             font-size: 24px;
             position: relative;
-            left: 35%;
+            left: 30%;
             top: 10%;
         }
 
         .edit-login-password{
             position: relative;
-            left: 102%;
+            left: 74%;
+            width: 210px;
         }
 
         #signUpPage{
@@ -185,13 +197,13 @@
         .box{
             width: 1000px;
             height: 400px;
-            background-color:white;
+            background-color:darkgrey;
             padding: 20px;
             border-radius: 8px;
             position: absolute;
             left: 13%;
             top: 25%;
-            opacity: 85%;
+            opacity: 90%;
         }
 
         #signUpPage div p{
@@ -204,6 +216,11 @@
         #signUp_signUp{
             color: black;
             font-weight: bold;
+        }
+
+        #confirmpassword{
+            margin-left: 240px;
+            width: 206px;
         }
         .txtname{
             width: 210px;
@@ -239,19 +256,38 @@
 
         #card-order{
             top: -100px;
-            width: 500px;
-            margin-left: 10px;
+            width: 350px;
+            margin-left: 5px;
         }
 
         #card-item{
             top: -100px;
-            width: 500px;
-            margin-left: 200px;
+            width: 350px;
+            margin-left: 10px;
         }
 
         #order_table{
-            bottom: 500px;
+            /*bottom: 200px;*/
+            margin-top: 10px;
         }
+
+        .total-box {
+            background-color: #f8f9fa !important;
+            position: relative;
+            padding: 20px !important;
+            border: 1px solid black !important;
+            top: -100px !important;
+            width: 350px !important;
+            margin-left: 10px !important;
+        }
+        .total-box h5, .total-box p {
+            margin: 0;
+        }
+
+        .label{
+            margin-left: 200px;
+        }
+
     </style>
 </head>
 <body>
@@ -279,11 +315,13 @@
         <p>Don't have an Account? <a href="#" id="login_signup">SignUp</a> </p>
         <div class="row g-3 position">
             <div class="col">
-                <input type="text" class="form-control txtname login-user-name" id="userName" placeholder="User name(First Name)" aria-label="User name">
+                <label for="fName" class="label">Username</label>
+                <input type="text" class="form-control txtname login-user-name" id="userName" placeholder="User name" aria-label="User name">
             </div>
         </div>
         <div class="row g-3 align-items-center position-password">
             <div class="col-auto">
+                <label for="fName" class="label">Password</label>
                 <input type="password" id="inputLoginPassword6" class="form-control edit-login-password" aria-describedby="passwordHelpInline" placeholder="Password">
             </div>
         </div>
@@ -307,11 +345,6 @@
 
             <div class="col-auto">
                 <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" placeholder="Password">
-            </div>
-            <div class="col-auto">
-                    <span id="passwordHelpInline" class="form-text pw-text">
-                      Must be 8-20 characters long.
-                    </span>
             </div>
             <div class="col-auto">
                 <input type="password" id="confirmpassword" class="form-control" aria-describedby="passwordHelpInline" placeholder="Confirm Password">
@@ -509,28 +542,47 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- Total & Payment -->
+            <div class="col-md-4" id="card-total">
+                <div class="total-box border rounded p-3" >
+                    <h5>Total: <strong id="totalDisplay">0.00</strong></h5>
+                    <p class="text-danger">SubTotal: <span id="subTotalDisplay">0.00</span></p>
+                    <div class="mb-3">
+                        <label class="form-label">Cash:</label>
+                        <input type="text" class="form-control" id="cash" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Discount:</label>
+                        <input type="text" class="form-control" id="discount" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Balance:</label>
+                        <input type="text" class="form-control" id="balance" />
+                    </div>
+                    <button class="btn btn-success w-100">Purchase</button>
+                </div>
+            </div>
 
-        <!-- Order Table -->
-        <div class="mt-5">
-            <table class="table table-striped" id="order_table">
-                <thead class="table-success">
-                <tr>
-                    <th scope="col">Order Id</th>
-                    <th scope="col">Customer ID</th>
-                    <th scope="col">Item Code</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Total</th>
-                </tr>
-                </thead>
-                <tbody id="order_tbody">
+            <!-- Order Table -->
+            <div class="mt-5">
+                <table class="table table-striped" id="order_table">
+                    <thead class="table-success">
+                    <tr>
+                        <th scope="col">Order Id</th>
+                        <th scope="col">Customer ID</th>
+                        <th scope="col">Item Code</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody id="order_tbody">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
-
 </section>
 
 

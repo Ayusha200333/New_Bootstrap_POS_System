@@ -1,4 +1,3 @@
-
 import { orders_db } from "../db/db.js";
 import OrdersModel from "../model/OrdersModel.js";
 
@@ -103,6 +102,7 @@ export function handleDelete() {
         }
     });
 }
+
 
 // Event Listeners for Button Actions
 $("#orderDetails_save").on('click', handleSave);
