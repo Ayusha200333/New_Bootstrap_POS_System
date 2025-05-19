@@ -1,6 +1,15 @@
 import {customer_db} from "../db/db.js";
 import CustomerModel from "../model/CustomerModel.js";
 
+let idx = -1
+
+document.addEventListener("DOMContentLoaded", function () {
+    if (document.getElementById("id")) {
+        loadCustomerIds();
+    }
+
+});
+
 $("#customer_save").on('click',function (){
     let id = $('#id').val();
     let name = $('#name').val();
@@ -14,6 +23,7 @@ $("#customer_save").on('click',function (){
             icon: 'error',
             confirmButtonText: 'Ok'
         })
+        loadCustomerIds();
     }else {
         let customer_data = new CustomerModel(id,name,address,contact);
 
@@ -30,6 +40,7 @@ $("#customer_save").on('click',function (){
             icon: "success",
             draggable: true
         });
+        loadCustomerIds();
     }
 })
 
@@ -51,7 +62,7 @@ function loadStudents() {
         $('#customer_tbody').append(data);
     })
 }
-let idx = -1
+
 $("#customer_tbody").on('click', 'tr', function(){
     idx = $(this).index();
     console.log(idx);
@@ -81,7 +92,6 @@ $("#customer_update").on('click', function(){
     let address = $("#address").val();
     let contact = $("#contact").val();
 
-    // Update student object
     customer_db[idx].id = id;
     customer_db[idx].name = name;
     customer_db[idx].address = address;
@@ -116,7 +126,7 @@ $("#customer_delete").on('click', function () {
 
     }).then((result) => {
         if (result.isConfirmed) {
-            // Remove the student from the array
+            // Remove the customer from the array
             customer_db.splice(idx, 1);
 
             // Reload the table
@@ -131,10 +141,16 @@ $("#customer_delete").on('click', function () {
                 text: 'The Customer has been removed.',
                 icon: 'success'
             });
+            loadCustomerIds();
         }
     });
 });
 
+function loadCustomerIds(){
+    let count = customer_db.length + 1;
+    let newId = "C" + count.toString().padStart(3, "0");
+    $('#id').val(newId);
+}
 
 function clear(){
     $('#id').val('');
@@ -142,3 +158,4 @@ function clear(){
     $('#address').val('');
     $('#contact').val('');
 }
+
